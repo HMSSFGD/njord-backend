@@ -2,6 +2,7 @@ package dev.icedcoffee;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import javax.persistence.*;
+import java.util.*;
 
 @Entity
 public class Report extends PanacheEntityBase {
@@ -18,6 +19,11 @@ public class Report extends PanacheEntityBase {
     public Status status = Status.UNREAD;
     @Column(nullable = false)
     public Priority priority = Priority.NOTSET;
-    @Column(length = 66000)
+    @Column(length = 660001)
     public String image = null;
+
+    public static List<Report> getUnresolved() {
+        List<Report> r = list("status < ?1", Status.RESOLVED);
+        return r;
+    }
 }

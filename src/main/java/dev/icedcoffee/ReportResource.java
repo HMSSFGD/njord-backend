@@ -38,13 +38,20 @@ public class ReportResource {
         r.priority = newr.priority;
         r.status = newr.status;
         r.persistAndFlush();
-        if (r.status == Status.RESOLVED)
+        if (r.status == Status.RESOLVED) {
             ws.broadcast(WebSocketEvent.DELETEPIN, r);
-        else
+        } else {
             ws.broadcast(WebSocketEvent.UPDATEPIN, r);
+        }
     }
 
     @GET
+    public List<Report> getUnresovled() {
+        return Report.getUnresolved();
+    }
+
+    @GET
+    @Path("/all")
     public List<Report> getAllReports() {
         return Report.listAll();
     }
