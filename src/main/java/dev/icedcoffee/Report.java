@@ -19,7 +19,7 @@ public class Report extends PanacheEntityBase {
     public Status status = Status.UNREAD;
     @Column(nullable = false)
     public Priority priority = Priority.NOTSET;
-    @Column(length = 660001)
+    @Column(length = 660003)
     public String image = null;
 
     public static List<Report> getUnresolved() {

@@ -26,5 +26,6 @@ jobs:
           username: ${{ secrets.UNAME }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
-          source: "target/njord-1.0.0-SNAPSHOT.jar"
+          source: "target/quarkus-app"
           target: "/opt/njord/"
+          strip_components: 1
