@@ -23,9 +23,25 @@ public class ReportResource {
         Report n = new Report();
         n.lat = r.lat;
         n.lng = r.lng;
+        n.image = r.image;
         n.persistAndFlush();
 
-        ws.broadcast(n);
+        ws.broadcast(WebSocketEvent.ADDPIN, n);
+    }
+
+    @POST
+    @Path("/update")
+    @Transactional
+    public void updateStatus(Report newr) {
+        Report r = Report.findById(newr.id);
+        if (r == null) return;
+        r.priority = newr.priority;
+        r.status = newr.status;
+        r.persistAndFlush();
+        if (r.status == Status.RESOLVED)
+            ws.broadcast(WebSocketEvent.DELETEPIN, r);
+        else
+            ws.broadcast(WebSocketEvent.UPDATEPIN, r);
     }
 
     @GET

@@ -1,5 +1,6 @@
 package dev.icedcoffee.JsonObjects;
 
 public class JSONReport {
-    public int lat, lng;
+    public float lat, lng, estimatedSuverity;
+    public String image;
 }

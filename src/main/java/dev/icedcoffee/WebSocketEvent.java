@@ -1,5 +1,5 @@
 package dev.icedcoffee;
 
 public enum WebSocketEvent {
-    ADDPIN, CONNECTIONOK
+    ADDPIN, CONNECTIONOK, UPDATEPIN, DELETEPIN,
 }

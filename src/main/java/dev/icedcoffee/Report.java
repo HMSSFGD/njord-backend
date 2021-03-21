@@ -11,11 +11,13 @@ public class Report extends PanacheEntityBase {
     @Column(updatable= false, nullable = false)
     public long id;
     @Column(nullable = false)
-    public int lat;
+    public float lat;
     @Column(nullable = false)
-    public int lng;
+    public float lng;
     @Column(nullable = false)
     public Status status = Status.UNREAD;
     @Column(nullable = false)
     public Priority priority = Priority.NOTSET;
+    @Column(length = 66000)
+    public String image = null;
 }

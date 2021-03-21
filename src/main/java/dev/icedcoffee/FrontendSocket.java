@@ -21,12 +21,12 @@ public class FrontendSocket {
     @OnOpen
     public void onOpen(Session session) {
         sessions.add(session);
-        sendMessage(om.toJson(new JSONWSEvent(WebSocketEvent.CONNECTIONOK, "All good bruh")));
+        JSONWSEvent e = new JSONWSEvent(WebSocketEvent.CONNECTIONOK, "All good bruh");
+        sendMessage(session, om.toJson(e));
     }
 
     @OnMessage
     public void onMessage(String message, Session session) {
-
     }
 
     @OnClose
@@ -40,9 +40,9 @@ public class FrontendSocket {
         cause.printStackTrace();
     }
 
-    public void broadcast(Report r) {
-        String e = om.toJson(new JSONWSEvent(WebSocketEvent.ADDPIN, r));
-        broadcast(e);
+    public void broadcast(WebSocketEvent e, Report r) {
+        String msg = om.toJson(new JSONWSEvent(e, r));
+        broadcast(msg);
     }
 
     private void broadcast(String message) {
